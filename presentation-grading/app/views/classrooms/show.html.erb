@@ -1,0 +1,23 @@
+<div class="col-xs-12 col-xs-offset-0 col-md-8 col-md-offset-2">
+  <h1><%= @classroom.name %></h1>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <td>Presentation Date</td>
+        <td>Student Name</td>
+        <td>Website Topics</td>
+        <td>Submit a Grade</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @classroom.presentations.each do |presentation| %>   
+        <tr>
+          <td><%= presentation.date %></td>
+          <td><%= presentation.presenter_name %></td>
+          <td><%= presentation.topics %></td>
+          <td><%= link_to 'Grade', new_classroom_presentation_grade_submission_path(@classroom.id, presentation.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

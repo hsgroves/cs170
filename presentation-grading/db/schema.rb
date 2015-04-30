@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150428172643) do
+ActiveRecord::Schema.define(version: 20150430003538) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -46,19 +46,37 @@ ActiveRecord::Schema.define(version: 20150428172643) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "classrooms", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.boolean  "current",    limit: 1,   default: true, null: false
+  end
+
   create_table "grade_submissions", force: :cascade do |t|
-    t.string   "email",           limit: 255
-    t.integer  "presentation_id", limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "email",              limit: 255
+    t.integer  "presentation_id",    limit: 4
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "appropriate_length", limit: 4
+    t.integer  "design_pattern",     limit: 4
+    t.integer  "good_description",   limit: 4
+    t.integer  "good_support",       limit: 4
+    t.integer  "bad_description",    limit: 4
+    t.integer  "bad_support",        limit: 4
+    t.integer  "improvement",        limit: 4
+    t.integer  "good_agree",         limit: 4
+    t.integer  "bad_agree",          limit: 4
+    t.text     "comments",           limit: 65535
   end
 
   create_table "presentations", force: :cascade do |t|
-    t.datetime "date"
+    t.date     "date"
     t.string   "presenter_name", limit: 255
     t.string   "topics",         limit: 255
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "classroom_id",   limit: 4
   end
 
 end
