@@ -6,7 +6,7 @@ ActiveAdmin.register GradeSubmission do
     id_column
     column :email
     column :presentation do |grade|
-      grade.presentation.presenter_name
+      grade.presentation.try(:presenter_name)
     end
     actions
   end

@@ -24,16 +24,7 @@ class GradeSubmission < ActiveRecord::Base
     :bad_agree,
     inclusion: { in: (1..10).to_a })
 
-  validate :email_unique_to_presentation
+  validates :email, uniqueness: { scope: :presentation_id }
 
   belongs_to :presentation
-
-  private
-
-  def email_unique_to_presentation
-    emails = self.presentation.grade_submissions.map {|x| x.email }
-    if emails.include? self.email
-      errors.add(:email, 'You have already submitted a grade for this presentation')
-    end
-  end
 end

@@ -24,7 +24,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <% if @presentations %>
           <form class="navbar-form navbar-left" role="search" action="<%= classroom_path(@classroom) %>" method="get">
-            <div class="form-group">
+            <div class="form-group no-extra-padding">
               <select class="form-control" name="date">
                 <% Presentation::DATE_CHOICES.each do |display, value|%>
                   <option value="<%= value %>"><%= display %></option>
@@ -39,9 +39,26 @@
     </div><!-- /.container-fluid -->
   </nav>
 
+  <% unless notice.blank? %>
+    <div class="row">
+      <div class="col-xs-12 col-xs-offset-0 col-md-8 col-md-offset-2">
+        <div class="bg-success padding">
+          <%= notice %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <% unless alert.blank? %>
+    <div class="row">
+      <div class="col-xs-12 col-xs-offset-0 col-md-8 col-md-offset-2">
+        <div class="bg-danger padding">
+          <%= alert %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
   <div class="container">
     <div class="row">
       <%= yield %>
